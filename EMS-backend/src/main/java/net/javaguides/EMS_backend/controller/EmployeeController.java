@@ -1,7 +1,7 @@
 package net.javaguides.EMS_backend.controller;
 
 import net.javaguides.EMS_backend.dto.EmployeeDto;
-import net.javaguides.EMS_backend.entity.Employee;
+
 import net.javaguides.EMS_backend.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/employees")
 public class EmployeeController {
     @Autowired
-    private EmployeeService employeeService;
+    private  EmployeeService employeeService;
     // Build Add employee REST API
     @PostMapping
     public ResponseEntity<EmployeeDto> createEmployee( @RequestBody  EmployeeDto employeeDto) {
@@ -32,6 +32,18 @@ public class EmployeeController {
     public ResponseEntity<List<EmployeeDto>> getAllEmployees() {
        List<EmployeeDto> employees= employeeService.getAllEmployees();
        return ResponseEntity.ok(employees);
+   }
+   @PutMapping("{id}")
+   public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable("id") long emp_id, @RequestBody EmployeeDto employeeDto) {
+        EmployeeDto saveEmployee = employeeService.updateEmployee(emp_id, employeeDto);
+        return new ResponseEntity<>(saveEmployee, HttpStatus.OK);
+   }
+
+   @DeleteMapping("{id}")
+    public ResponseEntity<EmployeeDto> deleteEmployee(@PathVariable("id") long emp_id) {
+        employeeService.deleteEmployee(emp_id);
+
+       return ResponseEntity.ok().build();
    }
 
 

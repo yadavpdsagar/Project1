@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class EmployeeServiceImp implements EmployeeService {
  private EmployeeRepository employeeRepository;
 
+
     @Override
     public EmployeeDto createEmployee(EmployeeDto employeeDto) {
         Employee employee = EmployeeMapper.maptoEmployee(employeeDto);
@@ -42,7 +43,26 @@ public class EmployeeServiceImp implements EmployeeService {
                 .collect(Collectors.toList()) ;
     }
 
+    @Override
+    public EmployeeDto updateEmployee(Long emp_id, EmployeeDto updateEmployee) {
+        Employee employee = employeeRepository.findById(emp_id).orElseThrow(()-> new ResourceNotFoundException("Employee is not found " + emp_id));
+        employee.setEmp_firstname(updateEmployee.getEmp_firstname());
+        employee.setEmp_firstname(updateEmployee.getEmp_lastname());
+        employee.setEmp_firstname(updateEmployee.getEmp_email());
 
+        Employee updateEmployeeObj = employeeRepository.save(employee);
+
+        return EmployeeMapper.maptoEmployeeDto(updateEmployeeObj) ;
+    }
+
+    @Override
+    public void  deleteEmployee(Long emp_id) {
+      Employee employee =  employeeRepository.findById(emp_id).orElseThrow(()->
+                new ResourceNotFoundException("Employee is not found " + emp_id));
+
+        employeeRepository.deleteById(emp_id);
+
+    }
 
 
 }
