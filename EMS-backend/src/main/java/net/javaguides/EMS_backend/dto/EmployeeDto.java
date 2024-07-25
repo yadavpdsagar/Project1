@@ -16,3 +16,10 @@ public class EmployeeDto {
     public String emp_email;
 
 }
+/*
+ "emp_id": "1"
+"emp_firstname": "sagar"
+ "emp_lastname" : "yadav"
+ "emp_email" : "sagar4260@gamil.com"
+*/
+
