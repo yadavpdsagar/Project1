@@ -1,5 +1,6 @@
 package net.javaguides.EMS_backend.controller;
 
+import lombok.AllArgsConstructor;
 import net.javaguides.EMS_backend.dto.EmployeeDto;
 
 import net.javaguides.EMS_backend.service.EmployeeService;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {

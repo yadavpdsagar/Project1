@@ -1,51 +1,39 @@
-import React from 'react'
-import "../../public/App.css"
+import React ,{ useEffect, useState }from 'react'
+import {  listEmployees } from '../services/EmployeeService'
 const ListEmployeeComponent = () => {
+const [employees, setEmployees]= useState([])
+    useEffect(()=>{
+listEmployees().then((Response) =>  {
+ setEmployees(Response.data);
+}).catch(error =>{
+  console.error(error);
+})
+    },[])
 
-    const dummyData=[
-        {    
-            "emp_id":1,
-         "emp_firstname": "tom  " ,
-          "emp_lastname" : "diny2",
-          "emp_email" : "tom@gamil.com"
-             } , 
-             {    
-                "emp_id":2,
-             "emp_firstname": "tom update " ,
-              "emp_lastname" : "diny2",
-              "emp_email" : "tom@gamil111more.com"
-                 },
-                 {    
-                    "emp_id":3,
-                 "emp_firstname": "tom mr " ,
-                  "emp_lastname" : "ysadav",
-                  "emp_email" : "tom@gamil111.com"
-                     }
-
-    ]
   return (
    <>
    <div className='container  '>
-    <table class="table table-bordered table-hover">
+    <table className="table table-bordered table-hover">
 
-    <thead class=" table-primary head-width ">
+    <thead className=" table-primary  " >
     <tr>
+         <th >Employee Id  </th>
         <th>Employee First name  </th>
         <th>Employee last name  </th>
         <th>Email Id</th>
-        <th>Employee Id  </th>
+        
     </tr>
 
     </thead>
     <tbody>
         {
-            dummyData.map(employee=>
+            employees.map(employee=>
                 <tr key={employee.emp_id}>
-                    
+                    <td>{employee.emp_id}</td>
                     <td>{employee.emp_firstname}</td>
                     <td>{employee.emp_lastname}</td>
                     <td>{employee.emp_email}</td>
-                    <td>{employee.emp_id}</td>
+                    
 
 
                 </tr>
@@ -65,23 +53,3 @@ const ListEmployeeComponent = () => {
 export default ListEmployeeComponent
 
 
-/*
-
- <thead>
-      <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-     
-    </tbody>
-  </table>
-
-*/
