@@ -47,8 +47,8 @@ public class EmployeeServiceImp implements EmployeeService {
     public EmployeeDto updateEmployee(Long emp_id, EmployeeDto updateEmployee) {
         Employee employee = employeeRepository.findById(emp_id).orElseThrow(()-> new ResourceNotFoundException("Employee is not found " + emp_id));
         employee.setEmp_firstname(updateEmployee.getEmp_firstname());
-        employee.setEmp_firstname(updateEmployee.getEmp_lastname());
-        employee.setEmp_firstname(updateEmployee.getEmp_email());
+        employee.setEmp_lastname(updateEmployee.getEmp_lastname());
+        employee.setEmp_email(updateEmployee.getEmp_email());
 
         Employee updateEmployeeObj = employeeRepository.save(employee);
 
